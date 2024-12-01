@@ -7,10 +7,15 @@
 #define VK_A 0x41
 
 // These are real Windows VK_* codes
+// https://learn.microsoft.com/zh-cn/windows/win32/inputdev/virtual-key-codes
 #ifndef VK_F1
-#define VK_F1 0x70
-#define VK_F13 0x7C
-#define VK_NUMPAD0 0x60
+#define VK_F1           0x70
+#define VK_F13          0x7C
+#define VK_BACK         0x08
+#define VK_TAB          0x09
+#define VK_NUMPAD0      0x60
+#define VK_LCONTROL     0xA2
+#define VK_RETURN       0x0D
 #endif
 
 void SdlInputHandler::performSpecialKeyCombo(KeyCombo combo)
@@ -226,17 +231,17 @@ void SdlInputHandler::handleKeyEvent(SDL_KeyboardEvent* event)
     else {
         switch (event->keysym.scancode) {
             case SDL_SCANCODE_BACKSPACE:
-                keyCode = 0x08;
+                keyCode = VK_BACK;
                 break;
             case SDL_SCANCODE_TAB:
-                keyCode = 0x09;
+                keyCode = VK_TAB;
                 break;
             case SDL_SCANCODE_CLEAR:
                 keyCode = 0x0C;
                 break;
             case SDL_SCANCODE_KP_ENTER: // FIXME: Is this correct?
             case SDL_SCANCODE_RETURN:
-                keyCode = 0x0D;
+                keyCode = VK_RETURN;
                 break;
             case SDL_SCANCODE_PAUSE:
                 keyCode = 0x13;
@@ -331,7 +336,7 @@ void SdlInputHandler::handleKeyEvent(SDL_KeyboardEvent* event)
                 keyCode = 0xA1;
                 break;
             case SDL_SCANCODE_LCTRL:
-                keyCode = 0xA2;
+                keyCode = VK_LCONTROL;
                 break;
             case SDL_SCANCODE_RCTRL:
                 keyCode = 0xA3;
